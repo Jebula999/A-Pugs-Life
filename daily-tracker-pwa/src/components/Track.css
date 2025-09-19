@@ -1,0 +1,63 @@
+.track-container {
+  padding: 10px;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.filters input,
+.filters select {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #FFD700;
+  background-color: #333;
+  color: #FFFFFF;
+}
+
+.filters button {
+  background: linear-gradient(145deg, #FFD700, #B8860B);
+  border: none;
+  color: #000000;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.entry-list {
+  list-style: none;
+  padding: 0;
+}
+
+.entry-item {
+  background-color: #1a1a1a;
+  border: 1px solid #FFD700;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.entry-item .timestamp {
+  font-size: 0.9em;
+  color: #aaa;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.entry-item .category {
+  font-weight: bold;
+  color: #FFD700;
+}
+
+.entry-item .value {
+  font-size: 1.1em;
+}

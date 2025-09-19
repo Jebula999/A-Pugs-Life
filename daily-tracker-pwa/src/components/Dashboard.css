@@ -1,0 +1,76 @@
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 10px;
+}
+
+.grid-button {
+  background: linear-gradient(145deg, #FFD700, #B8860B);
+  border: none;
+  color: #000000;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: bold;
+  width: 100%;
+  min-height: 80px;
+}
+
+.grid-button:hover {
+  background: linear-gradient(145deg, #B8860B, #FFD700);
+}
+
+.back-button {
+    background-color: #333;
+    border: 1px solid #FFD700;
+    color: #FFD700;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.customization-area {
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.add-new-button {
+  background-color: #444;
+  border: 1px solid #FFD700;
+  color: #FFD700;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.add-new-form {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.add-new-form input {
+  flex-grow: 1;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #FFD700;
+  background-color: #333;
+  color: #FFFFFF;
+}
+
+.add-new-form button {
+  background: linear-gradient(145deg, #FFD700, #B8860B);
+  border: none;
+  color: #000000;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+}
