@@ -7,30 +7,19 @@ import Flags from './components/Flags';
 
 function App() {
   const [activeTab, setActiveTab] = useState('Dashboard');
-
   const renderTab = () => {
     switch (activeTab) {
-      case 'Dashboard':
-        return <Dashboard />;
-      case 'Track':
-        return <Track />;
-      case 'Journal':
-        return <Journal />;
-      case 'Flags':
-        return <Flags />;
-      default:
-        return <Dashboard />;
+      case 'Dashboard': return <Dashboard />;
+      case 'Track': return <Track />;
+      case 'Journal': return <Journal />;
+      case 'Flags': return <Flags />;
+      default: return <Dashboard />;
     }
   };
-
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Daily Tracker</h1>
-      </header>
-      <main>
-        {renderTab()}
-      </main>
+      <header className="App-header"><h1>Daily Tracker</h1></header>
+      <main>{renderTab()}</main>
       <nav>
         <button onClick={() => setActiveTab('Dashboard')}>Dashboard</button>
         <button onClick={() => setActiveTab('Track')}>Track</button>
@@ -40,5 +29,4 @@ function App() {
     </div>
   );
 }
-
 export default App;

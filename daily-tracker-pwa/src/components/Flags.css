@@ -1,18 +1,3 @@
-.flags-container {
-  padding: 10px;
-}
-
-.flags-list {
-  list-style: none;
-  padding: 0;
-}
-
-.flag-item {
-  background-color: #1a1a1a;
-  border: 1px solid #FFD700;
-  border-radius: 5px;
-  padding: 15px;
-  margin-bottom: 10px;
-  color: #FFD700;
-  font-style: italic;
-}
+.flags-container { padding: 10px; }
+.flags-list { list-style: none; padding: 0; }
+.flag-item { background-color: #1a1a1a; border: 1px solid #FFD700; border-radius: 5px; padding: 15px; margin-bottom: 10px; color: #FFD700; font-style: italic; }

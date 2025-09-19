@@ -4,7 +4,7 @@ import './Track.css';
 
 const Track = () => {
   const [entries, setEntries] = useState([]);
-  const [sortOrder, setSortOrder] = useState('desc'); // 'asc' or 'desc'
+  const [sortOrder, setSortOrder] = useState('desc');
   const [categoryFilter, setCategoryFilter] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
@@ -21,7 +21,8 @@ const Track = () => {
         const end = endDate ? new Date(endDate) : null;
         if (start && entryDate < start) return false;
         if (end && entryDate > end) return false;
-        if (categoryFilter && !entry.path.join(' -> ').includes(categoryFilter)) {
+        const pathString = entry.path ? entry.path.join(' -> ') : '';
+        if (categoryFilter && !pathString.includes(categoryFilter)) {
           return false;
         }
         return true;
@@ -37,8 +38,8 @@ const Track = () => {
     const headers = 'Timestamp,Category,Value\n';
     const rows = filteredAndSortedEntries.map(entry => {
       const timestamp = new Date(entry.timestamp).toLocaleString();
-      const category = entry.path.join(' -> ');
-      const value = entry.value;
+      const category = entry.path ? entry.path.join(' -> ') : 'N/A';
+      const value = entry.value || 'N/A';
       return `"${timestamp}","${category}","${value}"\n`;
     }).join('');
 
@@ -57,22 +58,9 @@ const Track = () => {
     <div className="track-container">
       <h2>Tracked Entries</h2>
       <div className="filters">
-        <input
-          type="text"
-          placeholder="Filter by category..."
-          value={categoryFilter}
-          onChange={e => setCategoryFilter(e.target.value)}
-        />
-        <input
-          type="date"
-          value={startDate}
-          onChange={e => setStartDate(e.target.value)}
-        />
-        <input
-          type="date"
-          value={endDate}
-          onChange={e => setEndDate(e.target.value)}
-        />
+        <input type="text" placeholder="Filter by category..." value={categoryFilter} onChange={e => setCategoryFilter(e.target.value)} />
+        <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} />
+        <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} />
         <select value={sortOrder} onChange={e => setSortOrder(e.target.value)}>
           <option value="desc">Newest First</option>
           <option value="asc">Oldest First</option>
@@ -83,7 +71,7 @@ const Track = () => {
         {filteredAndSortedEntries.map((entry, index) => (
           <li key={index} className="entry-item">
             <span className="timestamp">{new Date(entry.timestamp).toLocaleString()}</span>
-            <span className="category">{entry.path.join(' -> ')}</span>
+            <span className="category">{entry.path ? entry.path.join(' -> ') : 'N/A'}</span>
             <span className="value">{entry.value}</span>
           </li>
         ))}

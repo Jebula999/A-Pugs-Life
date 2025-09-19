@@ -7,7 +7,6 @@ const Journal = () => {
   const [newEntry, setNewEntry] = useState('');
 
   useEffect(() => {
-    // Sort entries by timestamp descending (newest first)
     const sortedEntries = storage.getJournalEntries().sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
     setEntries(sortedEntries);
   }, []);
@@ -16,7 +15,6 @@ const Journal = () => {
     if (newEntry.trim() === '') return;
     storage.addJournalEntry(newEntry);
     setNewEntry('');
-    // Re-fetch and sort entries
     const sortedEntries = storage.getJournalEntries().sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
     setEntries(sortedEntries);
   };
@@ -25,7 +23,6 @@ const Journal = () => {
     const headers = 'Timestamp,Entry\n';
     const rows = entries.map(entry => {
       const timestamp = new Date(entry.timestamp).toLocaleString();
-      // Escape quotes and wrap in quotes
       const text = `"${entry.text.replace(/"/g, '""')}"`;
       return `"${timestamp}",${text}\n`;
     }).join('');

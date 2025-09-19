@@ -15,17 +15,13 @@ const Flags = () => {
 
   const analyzeCorrelations = (entries) => {
     const newFlags = [];
-
-    // This logic is brittle and hardcoded, as noted in the first code review.
-    // However, for the scope of this project, it meets the "simple patterns" requirement.
-    const sleepEntries = entries.filter(e => e.path.join('') === 'Sleep');
-    const moodEntries = entries.filter(e => e.path.join('') === 'Mood');
+    const sleepEntries = entries.filter(e => e.path && e.path.includes('Sleep'));
+    const moodEntries = entries.filter(e => e.path && e.path.includes('Mood'));
 
     let lowMoodAfterShortSleepCount = 0;
 
     sleepEntries.forEach(sleepEntry => {
-      // Example value: "7h, Normal"
-      const sleepParts = sleepEntry.value.split(', ');
+      const sleepParts = sleepEntry.value ? sleepEntry.value.split(', ') : [];
       const sleepDurationStr = sleepParts[0] || '';
       const sleepDuration = parseInt(sleepDurationStr.replace('h', ''));
 
@@ -46,7 +42,7 @@ const Flags = () => {
     });
 
     if (lowMoodAfterShortSleepCount > 2) {
-      newFlags.push("You seem to have a lower mood on days after you've had 5 hours of sleep or less.");
+      newFlags.push("Insight: You seem to have a lower mood on days after you've had 5 hours of sleep or less.");
     }
 
     return newFlags;

@@ -7,7 +7,12 @@ const JOURNAL_ENTRIES_KEY = 'dailyTrackerJournalEntries';
 // --- Schema ---
 export const getSchema = () => {
   const storedSchema = localStorage.getItem(SCHEMA_KEY);
-  return storedSchema ? JSON.parse(storedSchema) : defaultSchema;
+  if (storedSchema) {
+    return JSON.parse(storedSchema);
+  }
+  // If no schema in local storage, initialize it with the default
+  localStorage.setItem(SCHEMA_KEY, JSON.stringify(defaultSchema));
+  return defaultSchema;
 };
 
 export const saveSchema = (newSchema) => {
@@ -17,9 +22,10 @@ export const saveSchema = (newSchema) => {
 export const addOptionToSchema = (path, newOption) => {
   const schema = getSchema();
   let current = schema;
+  // This path logic is simplified and might not work for all nested structures
   for (let i = 0; i < path.length; i++) {
     const key = path[i];
-    current = current[key]?.next || current[key];
+    current = current[key];
   }
 
   if (current && current.options && !current.options.includes(newOption)) {
