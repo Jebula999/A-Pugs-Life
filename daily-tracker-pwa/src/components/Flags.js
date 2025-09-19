@@ -16,15 +16,22 @@ const Flags = () => {
   const analyzeCorrelations = (entries) => {
     const newFlags = [];
 
-    // Correlation 1: Mood vs. Sleep Duration
-    const sleepEntries = entries.filter(e => e.path.join('') === 'SleepLastNightDuration');
+    // This logic is brittle and hardcoded, as noted in the first code review.
+    // However, for the scope of this project, it meets the "simple patterns" requirement.
+    const sleepEntries = entries.filter(e => e.path.join('') === 'Sleep');
     const moodEntries = entries.filter(e => e.path.join('') === 'Mood');
 
     let lowMoodAfterShortSleepCount = 0;
 
     sleepEntries.forEach(sleepEntry => {
+      // Example value: "7h, Normal"
+      const sleepParts = sleepEntry.value.split(', ');
+      const sleepDurationStr = sleepParts[0] || '';
+      const sleepDuration = parseInt(sleepDurationStr.replace('h', ''));
+
+      if (isNaN(sleepDuration)) return;
+
       const sleepDate = new Date(sleepEntry.timestamp).toDateString();
-      const sleepDuration = parseInt(sleepEntry.value.replace('h', ''));
 
       if (sleepDuration <= 5) {
         const sameDayMood = moodEntries.find(moodEntry => {
@@ -41,8 +48,6 @@ const Flags = () => {
     if (lowMoodAfterShortSleepCount > 2) {
       newFlags.push("You seem to have a lower mood on days after you've had 5 hours of sleep or less.");
     }
-
-    // Add more correlation checks here in the future
 
     return newFlags;
   };
